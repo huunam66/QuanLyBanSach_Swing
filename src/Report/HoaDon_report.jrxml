@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8cc941ad-d687-4d32-b40c-114a2155ab02">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT dbo.CT_HOADON.MaHoaDon, dbo.CT_HOADON.MaSach, dbo.CT_HOADON.SoLuong, dbo.CT_HOADON.GiamGia, dbo.HOADON.MaKH, dbo.KHACHHANG.TenKhach, dbo.KHACHHANG.MaKH AS Expr2, dbo.SACH.MaSach AS Expr3, 
+                  dbo.SACH.TenSach, dbo.HOADON.MaHoaDon AS Expr1
+FROM     dbo.CT_HOADON INNER JOIN
+                  dbo.HOADON ON dbo.CT_HOADON.MaHoaDon = dbo.HOADON.MaHoaDon INNER JOIN
+                  dbo.KHACHHANG ON dbo.HOADON.MaKH = dbo.KHACHHANG.MaKH INNER JOIN
+                  dbo.NHANVIEN ON dbo.HOADON.MaNV = dbo.NHANVIEN.MaNV INNER JOIN
+                  dbo.SACH ON dbo.CT_HOADON.MaSach = dbo.SACH.MaSach]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="152" y="15" width="188" height="29" uuid="77e92f76-2408-4f14-a36a-6b06d3c7250d"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[HOÁ ĐƠN: ]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
