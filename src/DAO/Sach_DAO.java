@@ -7,6 +7,8 @@ package DAO;
 import DTO.Sach_DTO;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 /**
  *
  * @author nguye
@@ -31,6 +33,7 @@ public class Sach_DAO extends DataProvider{
                 l_Sachs.add(sach);
             }
             CloseConnection();
+            l_Sachs = (ArrayList<Sach_DTO>) l_Sachs.stream().sorted(Comparator.comparing(Sach_DTO::getTenSach)).collect(Collectors.toList());
             return l_Sachs;
         } catch (Exception e) {
              System.err.print("\nError getListSach !!!!");

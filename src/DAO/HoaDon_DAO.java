@@ -3,10 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
+import static DAO.DataProvider.resultData;
 import DTO.HoaDon_DTO;
+import DTO.NhaCungCap_DTO;
+import DTO.NhanVien_DTO;
+import DTO.PhieuNhap_DTO;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import javax.print.event.PrintJobEvent;
 
 /**
@@ -106,4 +111,77 @@ public class HoaDon_DAO extends DataProvider{
         
         return getAllHoaDon(query);
     }
+    
+    public static List<HoaDon_DTO> List_HoaDon_Ngay(java.util.Date Ngay){
+        try{
+            String query = "select * from HoaDon where NgayThanhToan = '" + new SimpleDateFormat("yyyy-MM-dd").format(Ngay) + "'";
+            ResultSet result = resultData(query);
+            List<HoaDon_DTO> hds = new ArrayList<>();
+            while(result.next()){
+                HoaDon_DTO hd = new HoaDon_DTO();
+                hd.setMaHoaDon(result.getLong(1));
+                hd.setMaKH(result.getLong(2));
+                hd.setMaNV(result.getLong(3));
+                hd.setNgayThanhToan(result.getDate(4));
+                hd.setSoLuongSach(result.getInt(5));
+                hd.setThanhTien(result.getDouble(6));
+                
+                hds.add(hd);
+            }
+            return hds;
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return null;
+    }
+    
+    public static List<HoaDon_DTO> List_HoaDon_Thang(String Nam, String Thang){
+        try{
+            String query = "select * from HoaDon where YEAR(NgayThanhToan) = " + Nam + " Month(NgayThanhToan) = " + Thang;
+            ResultSet result = resultData(query);
+            List<HoaDon_DTO> hds = new ArrayList<>();
+            while(result.next()){
+                HoaDon_DTO hd = new HoaDon_DTO();
+                hd.setMaHoaDon(result.getLong(1));
+                hd.setMaKH(result.getLong(2));
+                hd.setMaNV(result.getLong(3));
+                hd.setNgayThanhToan(result.getDate(4));
+                hd.setSoLuongSach(result.getInt(5));
+                hd.setThanhTien(result.getDouble(6));
+                
+                hds.add(hd);
+            }
+            return hds;
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return null;
+    }
+    
+    public static List<HoaDon_DTO> List_HoaDon_Nam(String Nam){
+        try{
+            String query = "select * from HoaDon where YEAR(NgayThanhToan) = " + Nam;
+            ResultSet result = resultData(query);
+            List<HoaDon_DTO> hds = new ArrayList<>();
+            while(result.next()){
+                HoaDon_DTO hd = new HoaDon_DTO();
+                hd.setMaHoaDon(result.getLong(1));
+                hd.setMaKH(result.getLong(2));
+                hd.setMaNV(result.getLong(3));
+                hd.setNgayThanhToan(result.getDate(4));
+                hd.setSoLuongSach(result.getInt(5));
+                hd.setThanhTien(result.getDouble(6));
+                
+                hds.add(hd);
+            }
+            return hds;
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return null;
+    }
+    
 }

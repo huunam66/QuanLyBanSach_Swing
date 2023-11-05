@@ -4,6 +4,15 @@
  */
 package GUI;
 
+import DAO.NhaCungCap_DAO;
+import DAO.Sach_DAO;
+import DTO.NhaCungCap_DTO;
+import DTO.Sach_DTO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+
 /**
  *
  * @author nguye
@@ -13,8 +22,21 @@ public class NhapSach_GUI extends javax.swing.JFrame {
     /**
      * Creates new form NhapSach
      */
-    public NhapSach_GUI() {
+    private Sach_GUI sag = null;
+    private String MaNV = null;
+    public NhapSach_GUI(Sach_GUI sg, String MaNV) {
+        this.MaNV = MaNV;
+        sag = sg;
         initComponents();
+        this.setLocationRelativeTo(null);
+        List<NhaCungCap_DTO> ncc = NhaCungCap_DAO.List_NhaCungCap();
+        List<Sach_DTO> sach = Sach_DAO.getListSach();
+        cbb_ncc.removeAllItems();
+        cbb_sachnhap.removeAllItems();
+        ncc.forEach(item -> cbb_ncc.addItem(item.getTenNCC()));
+        sach.forEach(item -> cbb_sachnhap.addItem(item.getTenSach()));
+        
+        
     }
 
     /**
@@ -47,6 +69,11 @@ public class NhapSach_GUI extends javax.swing.JFrame {
         btn_nhap = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Tổng chi:");
@@ -200,6 +227,16 @@ public class NhapSach_GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(this,"Bạn muốn quay lại trang chính ?", "Thông báo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            this.sag.setEnabled(true);
+            return;
+        }
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    }//GEN-LAST:event_formWindowClosing
 
     
 

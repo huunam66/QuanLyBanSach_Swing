@@ -4,25 +4,39 @@
  */
 package GUI;
 
+import DAO.NhaCungCap_DAO;
+import DTO.NhaCungCap_DTO;
+import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author nguye
  */
 public class NhaCungCap_GUI extends javax.swing.JFrame {
-
+ private DefaultTableModel tableModel;
+    private DefaultTableColumnModel tableColumnModel;
     /**
      * Creates new form NhaCungCap
      */
     public NhaCungCap_GUI() {
         initComponents();
+        tableModel = (DefaultTableModel)tab.getModel();
+        tableColumnModel = (DefaultTableColumnModel)tab.getColumnModel();
         btn_them.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/add.png"))));
         btnSua.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/update.png"))));
         btnXoa.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/delete.png"))));
         btnLamMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/reset.png"))));
         this.setLocationRelativeTo(null);
+        
+        load_table();
     }
 
     /**
@@ -36,17 +50,17 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Text_tenKhachHang = new javax.swing.JTextField();
+        txt_TenNCC = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        Text_sdt = new javax.swing.JTextField();
+        txt_SDT = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Textarea_diaChi = new javax.swing.JTextArea();
+        txta_DiaChi = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
-        Text_maKhachHang = new javax.swing.JTextField();
+        txt_MaNCC = new javax.swing.JTextField();
         title = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tab = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btn_them = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
@@ -54,33 +68,38 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
         btnLamMoi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("THÔNG TIN NHÀ CUNG CẤP"));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Tên nhà cung cấp:");
 
-        Text_tenKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_TenNCC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Số điện thoại:");
 
-        Text_sdt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_SDT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Địa chỉ:");
 
-        Textarea_diaChi.setColumns(20);
-        Textarea_diaChi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Textarea_diaChi.setLineWrap(true);
-        Textarea_diaChi.setRows(5);
-        jScrollPane1.setViewportView(Textarea_diaChi);
+        txta_DiaChi.setColumns(20);
+        txta_DiaChi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txta_DiaChi.setLineWrap(true);
+        txta_DiaChi.setRows(5);
+        jScrollPane1.setViewportView(txta_DiaChi);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Mã nhà cung cấp:");
 
-        Text_maKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text_maKhachHang.setFocusable(false);
+        txt_MaNCC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_MaNCC.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,9 +113,9 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Text_maKhachHang, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Text_tenKhachHang)
-                    .addComponent(Text_sdt))
+                    .addComponent(txt_MaNCC, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_TenNCC)
+                    .addComponent(txt_SDT))
                 .addGap(27, 27, 27)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -113,17 +132,17 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
                         .addGap(33, 33, 33))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Text_maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_MaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Text_tenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_TenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(Text_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(19, Short.MAX_VALUE))))
         );
 
@@ -132,26 +151,34 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
         title.setText("QUẢN LÝ NHÀ CUNG CẤP");
         title.setToolTipText("");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tab.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tab);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("THAO TÁC"));
 
         btn_them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
         btnSua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnXoa.setText("Xoá");
@@ -221,16 +248,82 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void load_column_table(){
+        tableModel.setColumnIdentifiers(new String[]{
+            "Mã NCC", "Tên NCC", "Số điện thoại", "Địa chỉ"
+        });
+        
+        tableColumnModel.getColumn(0).setPreferredWidth(100);
+        tableColumnModel.getColumn(1).setPreferredWidth(200);
+        tableColumnModel.getColumn(2).setPreferredWidth(120);
+        tableColumnModel.getColumn(3).setPreferredWidth(250);
+        
+        tab.getTableHeader().setFont(new Font("Aria", Font.BOLD, 16));
+    }
+    
+    private void load_table(){
+        load_column_table();
+        tableModel.setRowCount(0);
+        List<NhaCungCap_DTO> nccs = NhaCungCap_DAO.List_NhaCungCap();
+        if(nccs != null){
+            nccs.forEach(item ->{
+                tableModel.addRow(new String[]{
+                    String.valueOf(item.getMaNCC()),
+                    item.getTenNCC(),
+                    item.getSDT(),
+                    item.getDiaChi()
+                });
+            });
+        }
+    }
+   
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        if(txt_SDT.getText().equals("")
+                || txt_TenNCC.getText().equals("") || txta_DiaChi.equals("")){
+            JOptionPane.showConfirmDialog(this, "Nhập đầy đủ dữ liệu !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        String ten = txt_TenNCC.getText();
+        String sdt = txt_SDT.getText();
+        String diachi = txta_DiaChi.getText();
+        NhaCungCap_DTO ncc_dto = new NhaCungCap_DTO();
+        ncc_dto.setTenNCC(ten);
+        ncc_dto.setSDT(sdt);
+        ncc_dto.setDiaChi(diachi);
+        if(NhaCungCap_DAO.insert(ncc_dto) > 0){
+            JOptionPane.showConfirmDialog(this, "Thêm mới thành công !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            load_table();
+            return;
+        }
+        JOptionPane.showConfirmDialog(this, "Thêm mới thất bại !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(this,"Bạn muốn quay lại ?","Thông báo",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            return;
+        }
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        if(tab.getSelectedRowCount() != 1){
+                    JOptionPane.showConfirmDialog(this, "Chọn nhà cung cấp !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Text_maKhachHang;
-    private javax.swing.JTextField Text_sdt;
-    private javax.swing.JTextField Text_tenKhachHang;
-    private javax.swing.JTextArea Textarea_diaChi;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnXoa;
@@ -243,7 +336,11 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tab;
     private javax.swing.JLabel title;
+    private javax.swing.JTextField txt_MaNCC;
+    private javax.swing.JTextField txt_SDT;
+    private javax.swing.JTextField txt_TenNCC;
+    private javax.swing.JTextArea txta_DiaChi;
     // End of variables declaration//GEN-END:variables
 }

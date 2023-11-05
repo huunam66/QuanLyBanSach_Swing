@@ -247,7 +247,7 @@ public class TrangChu_GUI extends javax.swing.JFrame {
 
     private void btn_QuanLySachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLySachMouseClicked
         // TODO add your handling code here:
-        new Sach_GUI(this, this.Quyen);
+        new Sach_GUI(this, this.Quyen, this.Ma_NV);
         this.setEnabled(false);
     }//GEN-LAST:event_btn_QuanLySachMouseClicked
 

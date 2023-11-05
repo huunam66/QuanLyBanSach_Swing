@@ -31,11 +31,12 @@ public class Sach_GUI extends javax.swing.JFrame {
     private TrangChu_GUI trangChu_GUI = null;
     private String Quyen = null;
     private ArrayList<Sach_DTO> l_Sachs = null;
-
+    private String MaNV = null;
     /**
      * Creates new form SACH_GUI
      */
-    public Sach_GUI(TrangChu_GUI trangChu_GUI, String Quyen) {
+    public Sach_GUI(TrangChu_GUI trangChu_GUI, String Quyen, String MaNV) {
+        this.MaNV = MaNV;
         this.Quyen = Quyen;
         this.trangChu_GUI = trangChu_GUI;
         initComponents();
@@ -783,7 +784,7 @@ public class Sach_GUI extends javax.swing.JFrame {
 
     private void btn_nhacungcapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nhacungcapActionPerformed
         // TODO add your handling code here:
-        new ThongKe_GUI().setVisible(true);
+        new NhaCungCap_GUI().setVisible(true);
         
     }//GEN-LAST:event_btn_nhacungcapActionPerformed
 
@@ -797,7 +798,7 @@ public class Sach_GUI extends javax.swing.JFrame {
 
     private void btn_nhapsachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nhapsachActionPerformed
         // TODO add your handling code here:
-        new NhaCungCap_GUI().setVisible(true);
+       new NhapSach_GUI(this, MaNV).setVisible(true);
     }//GEN-LAST:event_btn_nhapsachActionPerformed
 
     private void searchTheoTacGia(){
@@ -921,7 +922,7 @@ public class Sach_GUI extends javax.swing.JFrame {
     }
     
     public void reSetALL(){
-        new Sach_GUI(this.trangChu_GUI, this.Quyen);
+        new Sach_GUI(this.trangChu_GUI, this.Quyen, this.MaNV);
         this.dispose();
     }
     
