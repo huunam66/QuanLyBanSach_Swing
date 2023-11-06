@@ -9,6 +9,7 @@ package DTO;
  * @author nguye
  */
 public class CT_PhieuNhap_DTO {
+    private long Ma_CT;
     private PhieuNhap_DTO PhieuNhap;
     private Sach_DTO Sach;
     private double Gia;
@@ -25,6 +26,24 @@ public class CT_PhieuNhap_DTO {
         PhieuNhap = new PhieuNhap_DTO();
         Sach = new Sach_DTO();
     }
+
+    public CT_PhieuNhap_DTO(long Ma_CT, PhieuNhap_DTO PhieuNhap, Sach_DTO Sach, double Gia, int SoLuong) {
+        this.Ma_CT = Ma_CT;
+        this.PhieuNhap = PhieuNhap;
+        this.Sach = Sach;
+        this.Gia = Gia;
+        this.SoLuong = SoLuong;
+    }
+
+    public long getMa_CT() {
+        return Ma_CT;
+    }
+
+    public void setMa_CT(long Ma_CT) {
+        this.Ma_CT = Ma_CT;
+    }
+    
+    
     
     public PhieuNhap_DTO getPhieuNhap() {
         return PhieuNhap;

@@ -280,6 +280,11 @@ public class Sach_GUI extends javax.swing.JFrame {
                 btn_LamMoiMouseClicked(evt);
             }
         });
+        btn_LamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LamMoiActionPerformed(evt);
+            }
+        });
 
         btn_Sua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_Sua.setText("Sửa");
@@ -543,7 +548,7 @@ public class Sach_GUI extends javax.swing.JFrame {
         Table_Sach.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
     }
     
-    private void loadTableSach(){
+    public void loadTableSach(){
         this.addColumnTable();
         
         DefaultTableModel tableModel = (DefaultTableModel)Table_Sach.getModel();
@@ -800,6 +805,12 @@ public class Sach_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
        new NhapSach_GUI(this, MaNV).setVisible(true);
     }//GEN-LAST:event_btn_nhapsachActionPerformed
+
+    private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
+        // TODO add your handling code here:
+        new Sach_GUI(trangChu_GUI, Quyen, MaNV);
+        this.dispose();
+    }//GEN-LAST:event_btn_LamMoiActionPerformed
 
     private void searchTheoTacGia(){
         DefaultTableModel tableModel = (DefaultTableModel)Table_Sach.getModel();

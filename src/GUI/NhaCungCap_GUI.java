@@ -160,6 +160,11 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
 
             }
         ));
+        tab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tab);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("THAO TÁC"));
@@ -182,9 +187,19 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
 
         btnXoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnLamMoi.setText("Làm mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -295,6 +310,10 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
         ncc_dto.setDiaChi(diachi);
         if(NhaCungCap_DAO.insert(ncc_dto) > 0){
             JOptionPane.showConfirmDialog(this, "Thêm mới thành công !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+             txt_MaNCC.setText("");
+             txt_SDT.setText("");
+              txt_TenNCC.setText("");
+               txta_DiaChi.setText("");
             load_table();
             return;
         }
@@ -314,9 +333,73 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(tab.getSelectedRowCount() != 1){
                     JOptionPane.showConfirmDialog(this, "Chọn nhà cung cấp !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
-
+            return;
         }
+        
+        long ma = Long.parseLong(txt_MaNCC.getText());
+        String ten = txt_TenNCC.getText();
+        String sdt = txt_SDT.getText();
+        String diachi = txta_DiaChi.getText();
+        
+        NhaCungCap_DTO ncc = new NhaCungCap_DTO();
+        ncc.setMaNCC(ma);
+        ncc.setTenNCC(ten);
+        ncc.setSDT(sdt);
+        ncc.setDiaChi(diachi);
+        
+        if(NhaCungCap_DAO.update(ncc) > 0){
+            JOptionPane.showConfirmDialog(this, "Cập nhật thành công !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            
+            load_table();
+            return;
+        }
+                    JOptionPane.showConfirmDialog(this, "Cập nhật thất bại !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void tabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabMouseClicked
+        // TODO add your handling code here:
+        
+        int row = tab.getSelectedRow();
+        txt_MaNCC.setText(tab.getValueAt(row, 0).toString());
+        txt_TenNCC.setText(tab.getValueAt(row, 1).toString());
+        txt_SDT.setText(tab.getValueAt(row, 2).toString());
+        txta_DiaChi.setText(tab.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_tabMouseClicked
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+         if(tab.getSelectedRowCount() != 1){
+                    JOptionPane.showConfirmDialog(this, "Chọn nhà cung cấp !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        long ma = Long.parseLong(txt_MaNCC.getText());
+        String ten = txt_TenNCC.getText();
+        String sdt = txt_SDT.getText();
+        String diachi = txta_DiaChi.getText();
+        
+        NhaCungCap_DTO ncc = new NhaCungCap_DTO();
+        ncc.setMaNCC(ma);
+        
+        if(NhaCungCap_DAO.delete(ncc) > 0){
+            JOptionPane.showConfirmDialog(this, "Xóa thành công !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            txt_MaNCC.setText("");
+             txt_SDT.setText("");
+              txt_TenNCC.setText("");
+               txta_DiaChi.setText("");
+            load_table();
+            return;
+        }
+                    JOptionPane.showConfirmDialog(this, "Xóa thất bại !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        new NhaCungCap_GUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
 
     /**
      * @param args the command line arguments

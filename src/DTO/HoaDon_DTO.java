@@ -17,11 +17,31 @@ public class HoaDon_DTO {
     private Date ngayThanhToan;
     private int soLuongSach;
     private double thanhTien;
+    private NhanVien_DTO nhanvien;
+    private KhachHang_DTO khachhang;
     
     public HoaDon_DTO(){
-        
+        nhanvien = new NhanVien_DTO();
+        khachhang = new KhachHang_DTO();
     }
 
+    public NhanVien_DTO getNhanvien() {
+        return nhanvien;
+    }
+
+    public void setNhanvien(NhanVien_DTO nhanvien) {
+        this.nhanvien = nhanvien;
+    }
+
+    public KhachHang_DTO getKhachhang() {
+        return khachhang;
+    }
+
+    public void setKhachhang(KhachHang_DTO khachhang) {
+        this.khachhang = khachhang;
+    }
+
+    
     public long getMaHoaDon() {
         return maHoaDon;
     }

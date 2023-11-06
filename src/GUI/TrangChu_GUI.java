@@ -5,6 +5,7 @@
 package GUI;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -34,6 +35,12 @@ public class TrangChu_GUI extends javax.swing.JFrame {
 //        }
 //        
         
+        btn_QuanLySach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/book-stack.png"))));
+        btn_ThongKe.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/analytics.png"))));
+        btn_QuanLyNV.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/steward.png"))));
+        btn_TaoHoaDon.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/bill.png"))));
+        btn_ThongTin.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/id-card.png"))));
+        
         ImageIcon imageicon = new ImageIcon("src/Pictures/imgTrangChu.jpg");
         Image image = imageicon.getImage().getScaledInstance(ImageHome.getWidth(), ImageHome.getHeight(), Image.SCALE_SMOOTH);
         ImageHome.setIcon(new ImageIcon(image));
@@ -61,8 +68,8 @@ public class TrangChu_GUI extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         btn_QuanLySach = new javax.swing.JButton();
-        btn_QuanLyHoaDon = new javax.swing.JButton();
-        btn_QuanLyKhachHang = new javax.swing.JButton();
+        btn_ThongKe = new javax.swing.JButton();
+        btn_QuanLyNV = new javax.swing.JButton();
         btn_TaoHoaDon = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_ThongTin = new javax.swing.JButton();
@@ -94,24 +101,29 @@ public class TrangChu_GUI extends javax.swing.JFrame {
             }
         });
 
-        btn_QuanLyHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_QuanLyHoaDon.setText("Thống kê");
-        btn_QuanLyHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_ThongKe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_ThongKe.setText("Thống kê");
+        btn_ThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_QuanLyHoaDonMouseClicked(evt);
+                btn_ThongKeMouseClicked(evt);
+            }
+        });
+        btn_ThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThongKeActionPerformed(evt);
             }
         });
 
-        btn_QuanLyKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_QuanLyKhachHang.setText("Quản lý nhân viên");
-        btn_QuanLyKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_QuanLyNV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_QuanLyNV.setText("Quản lý nhân viên");
+        btn_QuanLyNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_QuanLyKhachHangMouseClicked(evt);
+                btn_QuanLyNVMouseClicked(evt);
             }
         });
-        btn_QuanLyKhachHang.addActionListener(new java.awt.event.ActionListener() {
+        btn_QuanLyNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_QuanLyKhachHangActionPerformed(evt);
+                btn_QuanLyNVActionPerformed(evt);
             }
         });
 
@@ -129,25 +141,25 @@ public class TrangChu_GUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_QuanLySach, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_QuanLySach, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_QuanLyHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_QuanLyKhachHang)
+                .addComponent(btn_QuanLyNV, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_TaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btn_TaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_QuanLyHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btn_QuanLySach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_QuanLyKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_TaoHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(24, 24, 24))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_TaoHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(btn_QuanLyNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_QuanLySach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_ThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         btn_ThongTin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -155,6 +167,11 @@ public class TrangChu_GUI extends javax.swing.JFrame {
         btn_ThongTin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_ThongTinMouseClicked(evt);
+            }
+        });
+        btn_ThongTin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThongTinActionPerformed(evt);
             }
         });
 
@@ -172,7 +189,7 @@ public class TrangChu_GUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_ThongTin)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         menuHome.setText("Tuỳ chọn");
@@ -203,15 +220,15 @@ public class TrangChu_GUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ImageHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ImageLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ImageProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ImageHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ImageLogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ImageProfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,17 +268,17 @@ public class TrangChu_GUI extends javax.swing.JFrame {
         this.setEnabled(false);
     }//GEN-LAST:event_btn_QuanLySachMouseClicked
 
-    private void btn_QuanLyHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyHoaDonMouseClicked
+    private void btn_ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThongKeMouseClicked
         // TODO add your handling code here:
       
-        this.setEnabled(false);
-    }//GEN-LAST:event_btn_QuanLyHoaDonMouseClicked
+        new ThongKe_GUI().setVisible(true);
+    }//GEN-LAST:event_btn_ThongKeMouseClicked
 
-    private void btn_QuanLyKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyKhachHangMouseClicked
+    private void btn_QuanLyNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyNVMouseClicked
         // TODO add your handling code here:
         new KhachHang_GUI(this, this.Quyen);
         this.setEnabled(false);
-    }//GEN-LAST:event_btn_QuanLyKhachHangMouseClicked
+    }//GEN-LAST:event_btn_QuanLyNVMouseClicked
 
     private void btn_ThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThongTinMouseClicked
         // TODO add your handling code here:
@@ -288,9 +305,17 @@ public class TrangChu_GUI extends javax.swing.JFrame {
         this.setEnabled(false);
     }//GEN-LAST:event_menuItemDoiMatKhauActionPerformed
 
-    private void btn_QuanLyKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyKhachHangActionPerformed
+    private void btn_QuanLyNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyNVActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_QuanLyKhachHangActionPerformed
+    }//GEN-LAST:event_btn_QuanLyNVActionPerformed
+
+    private void btn_ThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThongTinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ThongTinActionPerformed
+
+    private void btn_ThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThongKeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ThongKeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,10 +325,10 @@ public class TrangChu_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel ImageHome;
     private javax.swing.JLabel ImageLogo;
     private javax.swing.JLabel ImageProfile;
-    private javax.swing.JButton btn_QuanLyHoaDon;
-    private javax.swing.JButton btn_QuanLyKhachHang;
+    private javax.swing.JButton btn_QuanLyNV;
     private javax.swing.JButton btn_QuanLySach;
     private javax.swing.JButton btn_TaoHoaDon;
+    private javax.swing.JButton btn_ThongKe;
     private javax.swing.JButton btn_ThongTin;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenuBar jMenuBar1;

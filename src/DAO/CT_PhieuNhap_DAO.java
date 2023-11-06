@@ -17,29 +17,43 @@ import java.util.List;
  *
  * @author nguye
  */
-public class CT_PhieuNhap_DAO {
+public class CT_PhieuNhap_DAO extends DataProvider{
     public static List<CT_PhieuNhap_DTO> List_NhaCungCap(){
         try{
             String query = "select * from CT_PHIEUNHAP";
             ResultSet result = resultData(query);
             List<CT_PhieuNhap_DTO> ct_pns = new ArrayList<>();
-            while(result.next()){
-                CT_PhieuNhap_DTO ctpn = new CT_PhieuNhap_DTO();
-                PhieuNhap_DTO pn = new PhieuNhap_DTO();
-                pn.setMaPN(result.getLong(1));
-                Sach_DTO s = new Sach_DTO();
-                s.setMaSach(result.getLong(2));
-                ctpn.setPhieuNhap(pn);
-                ctpn.setSach(s);
-                ctpn.setGia(result.getDouble(3));
-                ctpn.setSoLuong(result.getInt(4));
-                ct_pns.add(ctpn);
-          }
+            if(result != null){
+                while(result.next()){
+                    CT_PhieuNhap_DTO ctpn = new CT_PhieuNhap_DTO();
+                    ctpn.setMa_CT(result.getLong(1));
+                    PhieuNhap_DTO pn = new PhieuNhap_DTO();
+                    pn.setMaPN(result.getLong(2));
+                    Sach_DTO s = new Sach_DTO();
+                    s.setMaSach(result.getLong(3));
+                    ctpn.setPhieuNhap(pn);
+                    ctpn.setSach(s);
+                    ctpn.setGia(result.getDouble(4));
+                    ctpn.setSoLuong(result.getInt(5));
+                    ct_pns.add(ctpn);
+                }
+            }
+            
             return ct_pns;
         }
         catch(Exception e){
             System.err.println(e);
         }
         return null;
+    }
+    
+    public static int insert(CT_PhieuNhap_DTO ct){
+        try {
+            String text = "insert into ct_phieunhap values("+ct.getPhieuNhap().getMaPN()+", "+ct.getSach().getMaSach()+", "+ct.getGia()+", "+ct.getSoLuong()+")";
+            return UpdateData(text);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return 0;
     }
 }

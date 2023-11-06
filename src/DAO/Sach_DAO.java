@@ -5,6 +5,7 @@
 package DAO;
 
 import DTO.Sach_DTO;
+import DTO.TheLoai_DTO;
 import java.util.ArrayList;
 import java.sql.*;
 import java.util.Comparator;
@@ -80,5 +81,27 @@ public class Sach_DAO extends DataProvider{
             System.err.print("\nError getMaSach !!!!");
         }
         return -1;
+    }
+    
+     public static Sach_DTO getSachTheoTen(String tenSach){
+        String query = "select * from SACH where TenSach = N'" + tenSach + "'";
+        try {
+            ResultSet result = resultData(query);
+            result.next();
+            Sach_DTO s = new Sach_DTO();
+            s.setMaSach(result.getLong(1));
+            s.setTenSach(result.getString(2));
+            s.setGia(result.getDouble(3));
+            s.setSoLuong(result.getInt(4));
+            s.setTacGia(result.getString(5));
+            s.setNgayXuatBan(result.getDate(6));
+            s.setNhaXuatBan(result.getString(7));
+            s.setTheLoai(TheLoai_DAO.getTheLoai(result.getString(8)));
+            CloseConnection();
+            return s;
+        } catch (Exception e) {
+            System.err.print("\nError getMaSach !!!!");
+        }
+        return null;
     }
 }   

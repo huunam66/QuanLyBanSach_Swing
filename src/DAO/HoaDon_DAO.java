@@ -24,10 +24,13 @@ public class HoaDon_DAO extends DataProvider{
         String query = "select count(*) from HOADON";
         try {
             ResultSet result = resultData(query);
-            result.next();
-            String value = result.getString(1);
-            CloseConnection();
-            return value;
+            if(result != null){
+                result.next();
+                String value = result.getString(1);
+                CloseConnection();
+                return value;
+            }
+            
         } catch (Exception e) {
             System.err.print("\nError getCountHoaDon !!!!");
         }
@@ -38,15 +41,17 @@ public class HoaDon_DAO extends DataProvider{
         try{
             String query = "select top(1) * from KHACHHANG order by MaKH desc";
             ResultSet result = resultData(query);
-            result.next();
-            long maKH = result.getLong(1);
-            query = "insert into HOADON values(" + maKH + ", " + maNV + ", '" + ngayThanhToan + "', 0, 0)";
-            return UpdateData(query);
+            if(result != null){
+                 result.next();
+                long maKH = result.getLong(1);
+                query = "insert into HOADON values(" + maKH + ", " + maNV + ", '" + ngayThanhToan + "', 0, 0)";
+                return UpdateData(query);
+            }
         }
         catch(Exception e){
-            return -1;
+            System.err.print(e);
         }
-        
+        return -1;
     }
     
     public static String getMaHD(){
@@ -117,17 +122,21 @@ public class HoaDon_DAO extends DataProvider{
             String query = "select * from HoaDon where NgayThanhToan = '" + new SimpleDateFormat("yyyy-MM-dd").format(Ngay) + "'";
             ResultSet result = resultData(query);
             List<HoaDon_DTO> hds = new ArrayList<>();
-            while(result.next()){
-                HoaDon_DTO hd = new HoaDon_DTO();
-                hd.setMaHoaDon(result.getLong(1));
-                hd.setMaKH(result.getLong(2));
-                hd.setMaNV(result.getLong(3));
-                hd.setNgayThanhToan(result.getDate(4));
-                hd.setSoLuongSach(result.getInt(5));
-                hd.setThanhTien(result.getDouble(6));
-                
-                hds.add(hd);
+            if(result != null){
+                while(result.next()){
+                    HoaDon_DTO hd = new HoaDon_DTO();
+                    hd.setMaHoaDon(result.getLong(1));
+                    hd.setMaKH(result.getLong(2));
+                    hd.setMaNV(result.getLong(3));
+                    hd.setNgayThanhToan(result.getDate(4));
+                    hd.setSoLuongSach(result.getInt(5));
+                    hd.setThanhTien(result.getDouble(6));
+                    hd.setKhachhang(KhachHang_DAO.getKhachHang(String.valueOf(result.getLong(2))));
+                    hd.setNhanvien(NhanVien_DAO.getNhanVien(String.valueOf(result.getLong(3))));
+                    hds.add(hd);
+                }
             }
+            
             return hds;
         }
         catch(Exception e){
@@ -138,20 +147,25 @@ public class HoaDon_DAO extends DataProvider{
     
     public static List<HoaDon_DTO> List_HoaDon_Thang(String Nam, String Thang){
         try{
-            String query = "select * from HoaDon where YEAR(NgayThanhToan) = " + Nam + " Month(NgayThanhToan) = " + Thang;
+            String query = "select * from HoaDon where YEAR(NgayThanhToan) = " + Nam + " and Month(NgayThanhToan) = " + Thang;
             ResultSet result = resultData(query);
             List<HoaDon_DTO> hds = new ArrayList<>();
-            while(result.next()){
-                HoaDon_DTO hd = new HoaDon_DTO();
-                hd.setMaHoaDon(result.getLong(1));
-                hd.setMaKH(result.getLong(2));
-                hd.setMaNV(result.getLong(3));
-                hd.setNgayThanhToan(result.getDate(4));
-                hd.setSoLuongSach(result.getInt(5));
-                hd.setThanhTien(result.getDouble(6));
-                
-                hds.add(hd);
+            if(result != null){
+                while(result.next()){
+                    HoaDon_DTO hd = new HoaDon_DTO();
+                    hd.setMaHoaDon(result.getLong(1));
+                    hd.setMaKH(result.getLong(2));
+                    hd.setMaNV(result.getLong(3));
+                    hd.setNgayThanhToan(result.getDate(4));
+                    hd.setSoLuongSach(result.getInt(5));
+                    hd.setThanhTien(result.getDouble(6));
+                    hd.setKhachhang(KhachHang_DAO.getKhachHang(String.valueOf(result.getLong(2))));
+                    hd.setNhanvien(NhanVien_DAO.getNhanVien(String.valueOf(result.getLong(3))));
+
+                    hds.add(hd);
+                }
             }
+            
             return hds;
         }
         catch(Exception e){
@@ -165,17 +179,22 @@ public class HoaDon_DAO extends DataProvider{
             String query = "select * from HoaDon where YEAR(NgayThanhToan) = " + Nam;
             ResultSet result = resultData(query);
             List<HoaDon_DTO> hds = new ArrayList<>();
-            while(result.next()){
-                HoaDon_DTO hd = new HoaDon_DTO();
-                hd.setMaHoaDon(result.getLong(1));
-                hd.setMaKH(result.getLong(2));
-                hd.setMaNV(result.getLong(3));
-                hd.setNgayThanhToan(result.getDate(4));
-                hd.setSoLuongSach(result.getInt(5));
-                hd.setThanhTien(result.getDouble(6));
-                
-                hds.add(hd);
+            if(result != null){
+                while(result.next()){
+                    HoaDon_DTO hd = new HoaDon_DTO();
+                    hd.setMaHoaDon(result.getLong(1));
+                    hd.setMaKH(result.getLong(2));
+                    hd.setMaNV(result.getLong(3));
+                    hd.setNgayThanhToan(result.getDate(4));
+                    hd.setSoLuongSach(result.getInt(5));
+                    hd.setThanhTien(result.getDouble(6));
+                    hd.setKhachhang(KhachHang_DAO.getKhachHang(String.valueOf(result.getLong(2))));
+                    hd.setNhanvien(NhanVien_DAO.getNhanVien(String.valueOf(result.getLong(3))));
+
+                    hds.add(hd);
+                }
             }
+           
             return hds;
         }
         catch(Exception e){

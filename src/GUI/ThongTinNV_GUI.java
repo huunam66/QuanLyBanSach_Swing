@@ -261,7 +261,7 @@ public class ThongTinNV_GUI extends javax.swing.JFrame {
 
     private void setThongTinNV(String Ma_NV){
         NhanVien_DTO nhanvien = NhanVien_DAO.getNhanVien(Ma_NV);
-        
+        Text_maNV.setText(Ma_NV);
         titleChucVu.setText(nhanvien.getChucVu().toUpperCase());
         
         Text_tenNV.setText(nhanvien.getTenNhanVien());

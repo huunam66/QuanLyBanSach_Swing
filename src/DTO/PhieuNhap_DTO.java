@@ -16,7 +16,7 @@ public class PhieuNhap_DTO {
     private double TongTien;
     private NhaCungCap_DTO NhaCungCap;
     private NhanVien_DTO NhanVien;
-    
+    private int soluong;
     
     public PhieuNhap_DTO() {
         NhaCungCap = new NhaCungCap_DTO();
@@ -29,6 +29,14 @@ public class PhieuNhap_DTO {
         this.TongTien = TongTien;
         this.NhaCungCap = NhaCungCap;
         this.NhanVien = NhanVien;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 
     public long getMaPN() {

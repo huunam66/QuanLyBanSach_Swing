@@ -16,7 +16,48 @@ import java.util.stream.Collectors;
  */
 public class NhaCungCap_DAO extends DataProvider{
     
+      public static NhaCungCap_DTO Get_NhaCungCap_TheoTen(String ten){
+     
+        try{
+            String query = "select * from NhaCungCap where tenncc = N'"+ten+"'";
+            ResultSet result = resultData(query);
+            result.next();
+                
+            NhaCungCap_DTO ncc = new NhaCungCap_DTO();
+            ncc.setMaNCC(result.getLong(1));
+            ncc.setTenNCC(result.getString(2));
+            ncc.setSDT(result.getString(3));
+            ncc.setDiaChi(result.getString(4));
+            
+            return ncc;
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return null;
+    }
     
+      public static NhaCungCap_DTO Get_NhaCungCap(String ma_ncc){
+     
+        try{
+            String query = "select * from NhaCungCap where mancc = " +ma_ncc;
+            ResultSet result = resultData(query);
+            if(result != null){
+                result.next();
+                
+                NhaCungCap_DTO ncc = new NhaCungCap_DTO();
+                ncc.setMaNCC(result.getLong(1));
+                ncc.setTenNCC(result.getString(2));
+                ncc.setSDT(result.getString(3));
+                ncc.setDiaChi(result.getString(4));
+                 return ncc;
+            } 
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return null;
+    }
     
     public static List<NhaCungCap_DTO> List_NhaCungCap(){
      
