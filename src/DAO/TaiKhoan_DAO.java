@@ -36,9 +36,19 @@ public class TaiKhoan_DAO extends DataProvider{
         return null;
     }
     
+    public static int change_pw(String manv, String pw){
+        try{
+            return UpdateData("update taikhoan set password = '"+pw+"' where manv = " + manv);
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return 0;
+    }
     
-    public static ArrayList<String[]> getListTaiKhoan(){
-        String query = "select * from dbo.getListTaiKhoan()";
+    
+    public static ArrayList<String[]> getListTaiKhoan(String MaNV){
+        String query = "select tk.*, nv.tennhanvien from TaiKhoan tk, NhanVien nv where tk.MaNV != " + MaNV + " and tk.manv = nv.manv";
         try {
             ResultSet result = resultData(query);
             ArrayList<String[]> l_taiKhoans = new ArrayList<String[]>();
@@ -48,8 +58,7 @@ public class TaiKhoan_DAO extends DataProvider{
                     result.getString(2),
                     result.getString(3),
                     result.getString(4),
-                    result.getString(5),
-                    result.getString(6)
+                    result.getString(5)
                 }); 
             }
             CloseConnection();
@@ -96,7 +105,7 @@ public class TaiKhoan_DAO extends DataProvider{
     }
     
     public static int updateQuyen(String maNV, String quyen){
-        String query = "update TAIKHOAN set Quyen = '" + quyen + "' where MaNV = " + maNV;
+        String query = "update TAIKHOAN set Quyen = N'" + quyen + "' where MaNV = " + maNV;
         int value = UpdateData(query);
         CloseConnection();
         return value;

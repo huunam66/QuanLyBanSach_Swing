@@ -3,18 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/CTHoadon_GUI.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/NhaCungCap_DAO.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DTO/PhieuNhap_DTO.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/TaiKhoan_GUI.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/KhachHang_DAO.java</file>
-            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DTO/CT_PhieuNhap_DTO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DTO/NhanVien_DTO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/DangNhap_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/NhanVien_DAO.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/NhapSach_GUI.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/ThongTinNV_GUI.java</file>
-            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/NhaCungCap_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DTO/CT_HoaDon_DTO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/DoiMatKhau_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/TaiKhoan_DAO.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/Sach_DAO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/TaoHoaDon_GUI.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/Sach_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/ThongKe_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/TheLoai_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/HoaDon_DAO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/CT_HoaDon_DAO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DTO/CT_PhieuNhap_DTO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DTO/HoaDon_DTO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/NhanVien_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/KhachHang_GUI.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/NhaCungCap_GUI.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/GUI/TrangChu_GUI.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/CT_PhieuNhap_DAO.java</file>
+            <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/DataProvider.java</file>
             <file>file:/C:/Users/nguye/Desktop/Nhom-1_DeTai-11_QL-BanSach/Nhom-1_DeTai-11_QL-BanSach/src/DAO/PhieuNhap_DAO.java</file>
         </group>
     </open-files>

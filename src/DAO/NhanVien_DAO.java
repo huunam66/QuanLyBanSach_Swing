@@ -38,8 +38,8 @@ public class NhanVien_DAO extends DataProvider{
         return null;
     }
     
-    public static ArrayList<NhanVien_DTO> getListNhanVien(){
-        String query = "select * from NHANVIEN";
+    public static ArrayList<NhanVien_DTO> getListNhanVien(String MaNV){
+        String query = "select * from NHANVIEN where MaNV != " + MaNV;
         try {
             ResultSet result = resultData(query);
             ArrayList<NhanVien_DTO> l_nhanviens = new ArrayList<NhanVien_DTO>();

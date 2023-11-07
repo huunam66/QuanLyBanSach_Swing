@@ -85,6 +85,8 @@ public class HoaDon_DAO extends DataProvider{
                     HD.setNgayThanhToan(simpaDate.parse(result.getString("NgayThanhToan")));
                     HD.setSoLuongSach(Integer.parseInt(result.getString("SoLuongSach")));
                     HD.setThanhTien(Double.parseDouble(result.getString("ThanhTien")));
+                    HD.setKhachhang(KhachHang_DAO.getKhachHang(String.valueOf(result.getLong(2))));
+                    HD.setNhanvien(NhanVien_DAO.getNhanVien(String.valueOf(result.getLong(3))));
                     l_HoaDon.add(HD);
                 }
                 return l_HoaDon;

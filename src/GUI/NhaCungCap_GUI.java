@@ -30,10 +30,10 @@ public class NhaCungCap_GUI extends javax.swing.JFrame {
         initComponents();
         tableModel = (DefaultTableModel)tab.getModel();
         tableColumnModel = (DefaultTableColumnModel)tab.getColumnModel();
-        btn_them.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/add.png"))));
-        btnSua.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/update.png"))));
-        btnXoa.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/delete.png"))));
-        btnLamMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/reset.png"))));
+        btn_them.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/add.png")));
+        btnSua.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/update.png")));
+        btnXoa.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/delete.png")));
+        btnLamMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/reset.png")));
         this.setLocationRelativeTo(null);
         
         load_table();

@@ -6,14 +6,21 @@ package GUI;
 
 import DAO.HoaDon_DAO;
 import DAO.PhieuNhap_DAO;
+import DAO.Sach_DAO;
 import DTO.HoaDon_DTO;
 import DTO.PhieuNhap_DTO;
+import DTO.Sach_DTO;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,7 +39,7 @@ public class ThongKe_GUI extends javax.swing.JFrame {
     private DefaultComboBoxModel cbb_theonam_month_model = null;
     private DefaultComboBoxModel cbb_theothang_month_model = null;
     private DefaultComboBoxModel cbb_theonam_year_model = null;
-    public ThongKe_GUI() {
+    public ThongKe_GUI(String quyen) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Thống kê");
@@ -40,6 +47,29 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         tabModel = (DefaultTableModel)tab.getModel();
         tabColumnModel = (DefaultTableColumnModel)tab.getColumnModel();
         
+        String[] items_cbb = new String[]{"Doanh thu", "Phiếu nhập", "Tồn kho"};
+        for(String i : items_cbb){
+            if(quyen.toUpperCase().equals("NHÂN VIÊN")){
+                if(i.equals("Doanh thu")){
+                    cbb_ThongKe.addItem(i);
+                    break;
+                }
+            }
+            else if(quyen.toUpperCase().equals("THỦ KHO")){
+                if(!i.equals("Doanh thu")){
+                    cbb_ThongKe.addItem(i);
+                }
+            }
+            else{
+                cbb_ThongKe.addItem(i);
+            }
+        }
+          rd_conhang.setVisible(false);
+            rd_hethang.setVisible(false);
+            rd_conhang.setSelected(true);
+        
+        btn_loc.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/filter.png")));
+               
         cbb_theonam_month_model = (DefaultComboBoxModel)cbb_theonam_month.getModel();
         cbb_theothang_month_model = (DefaultComboBoxModel)cbb_theothang_month.getModel();
         cbb_theonam_year_model = (DefaultComboBoxModel)cbb_theonam_year.getModel();
@@ -73,10 +103,10 @@ public class ThongKe_GUI extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tab = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        lb_tongsach_left = new javax.swing.JLabel();
         lb_tongsach = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lb_thongtu = new javax.swing.JLabel();
+        lb_tt_tc = new javax.swing.JLabel();
+        lb_tt_tc_right = new javax.swing.JLabel();
         pan_thang = new javax.swing.JPanel();
         cbb_theonam_month = new javax.swing.JComboBox<>();
         cbb_theothang_month = new javax.swing.JComboBox<>();
@@ -90,8 +120,16 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         rd_TheoNgay = new javax.swing.JRadioButton();
         rd_TheoThang = new javax.swing.JRadioButton();
         rd_TheoNam = new javax.swing.JRadioButton();
+        btn_loc = new javax.swing.JButton();
+        rd_hethang = new javax.swing.JRadioButton();
+        rd_conhang = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,55 +139,26 @@ public class ThongKe_GUI extends javax.swing.JFrame {
 
             }
         ));
+        tab.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(tab);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Tổng sách:");
+        lb_tongsach_left.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lb_tongsach_left.setText("Tổng sách:");
 
-        lb_tongsach.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lb_tongsach.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lb_tongsach.setText("0");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Tổng thu:");
+        lb_tt_tc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lb_tt_tc.setText("Tổng thu:");
 
-        lb_thongtu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lb_thongtu.setText("0 đ");
+        lb_tt_tc_right.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lb_tt_tc_right.setText("0 đ");
 
         pan_thang.setBorder(javax.swing.BorderFactory.createTitledBorder("Theo tháng"));
 
         cbb_theonam_month.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbb_theonam_month.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbb_theonam_monthItemStateChanged(evt);
-            }
-        });
-        cbb_theonam_month.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cbb_theonam_monthMousePressed(evt);
-            }
-        });
-        cbb_theonam_month.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cbb_theonam_monthPropertyChange(evt);
-            }
-        });
 
         cbb_theothang_month.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbb_theothang_month.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbb_theothang_monthItemStateChanged(evt);
-            }
-        });
-        cbb_theothang_month.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cbb_theothang_monthMousePressed(evt);
-            }
-        });
-        cbb_theothang_month.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cbb_theothang_monthPropertyChange(evt);
-            }
-        });
 
         javax.swing.GroupLayout pan_thangLayout = new javax.swing.GroupLayout(pan_thang);
         pan_thang.setLayout(pan_thangLayout);
@@ -172,7 +181,6 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thống kê"));
 
         cbb_ThongKe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbb_ThongKe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doanh thu", "Phiếu nhập" }));
         cbb_ThongKe.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbb_ThongKeItemStateChanged(evt);
@@ -195,27 +203,12 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         pan_nam.setBorder(javax.swing.BorderFactory.createTitledBorder("Theo năm"));
 
         cbb_theonam_year.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbb_theonam_year.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbb_theonam_yearItemStateChanged(evt);
-            }
-        });
-        cbb_theonam_year.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cbb_theonam_yearMousePressed(evt);
-            }
-        });
-        cbb_theonam_year.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cbb_theonam_yearPropertyChange(evt);
-            }
-        });
 
         javax.swing.GroupLayout pan_namLayout = new javax.swing.GroupLayout(pan_nam);
         pan_nam.setLayout(pan_namLayout);
         pan_namLayout.setHorizontalGroup(
             pan_namLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cbb_theonam_year, javax.swing.GroupLayout.Alignment.TRAILING, 0, 181, Short.MAX_VALUE)
+            .addComponent(cbb_theonam_year, javax.swing.GroupLayout.Alignment.TRAILING, 0, 187, Short.MAX_VALUE)
         );
         pan_namLayout.setVerticalGroup(
             pan_namLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,11 +226,6 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         pic_theongay.setDateFormatString("dd/MM/yyyy");
         pic_theongay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pic_theongay.setPreferredSize(new java.awt.Dimension(98, 26));
-        pic_theongay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                pic_theongayPropertyChange(evt);
-            }
-        });
 
         javax.swing.GroupLayout pan_ngayLayout = new javax.swing.GroupLayout(pan_ngay);
         pan_ngay.setLayout(pan_ngayLayout);
@@ -284,6 +272,46 @@ public class ThongKe_GUI extends javax.swing.JFrame {
             }
         });
 
+        btn_loc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_loc.setText("Lọc");
+        btn_loc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_locActionPerformed(evt);
+            }
+        });
+
+        rd_hethang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rd_hethang.setText("Hết hàng");
+        rd_hethang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rd_hethangItemStateChanged(evt);
+            }
+        });
+        rd_hethang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rd_hethangMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                rd_hethangMousePressed(evt);
+            }
+        });
+
+        rd_conhang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rd_conhang.setText("Còn hàng");
+        rd_conhang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rd_conhangItemStateChanged(evt);
+            }
+        });
+        rd_conhang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rd_conhangMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                rd_conhangMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -291,23 +319,25 @@ public class ThongKe_GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                    .addComponent(title_TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lb_tt_tc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lb_tongsach_left, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb_tongsach)
-                            .addComponent(lb_thongtu))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lb_tt_tc_right))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(title_TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(526, 526, 526))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rd_conhang)
+                                .addGap(18, 18, 18)
+                                .addComponent(rd_hethang)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pan_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,19 +351,23 @@ public class ThongKe_GUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rd_TheoNam)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(pan_nam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                            .addComponent(pan_nam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(title_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rd_TheoNgay)
-                    .addComponent(rd_TheoThang)
-                    .addComponent(rd_TheoNam))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rd_TheoNgay)
+                        .addComponent(rd_TheoThang)
+                        .addComponent(rd_TheoNam))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rd_conhang)
+                        .addComponent(rd_hethang)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pan_ngay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -343,13 +377,16 @@ public class ThongKe_GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_tongsach, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_thongtu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_tongsach_left)
+                            .addComponent(lb_tongsach))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_tt_tc)
+                            .addComponent(lb_tt_tc_right)))
+                    .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -378,7 +415,9 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         load_column_table_DoanhThu();
         tabModel.setRowCount(0);
         SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
-        hds.forEach(item ->{
+        long sl = 0;
+        long tt = 0;
+        for(HoaDon_DTO item : hds){
             tabModel.addRow(new String[]{
                 String.valueOf(item.getMaHoaDon()),
                 item.getKhachhang().getTenKhach(),
@@ -387,7 +426,13 @@ public class ThongKe_GUI extends javax.swing.JFrame {
                 String.valueOf(item.getSoLuongSach()),
                 String.valueOf(item.getThanhTien())
             });
-        });
+            sl += item.getSoLuongSach();
+            tt += item.getThanhTien();
+        };
+        
+        lb_tongsach.setText(String.valueOf(sl));
+        lb_tt_tc.setText("Tổng thu:");
+        lb_tt_tc_right.setText(String.valueOf(tt) + " đ");
     }
     
     private void load_column_table_PhieuNhap(){
@@ -409,7 +454,9 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         load_column_table_PhieuNhap();
         tabModel.setRowCount(0);
         SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
-        pns.forEach(item ->{
+        long sl = 0;
+        long tc = 0;
+        for(PhieuNhap_DTO item : pns){
             tabModel.addRow(new String[]{
                 String.valueOf(item.getMaPN()),
                 item.getNhaCungCap().getTenNCC(),
@@ -418,13 +465,56 @@ public class ThongKe_GUI extends javax.swing.JFrame {
                 String.valueOf(item.getSoluong()),
                 String.valueOf(item.getTongTien())
             });
-        });
+            sl += item.getSoluong();
+            tc += item.getTongTien();
+        };
+        
+        lb_tongsach.setText(String.valueOf(sl));
+        lb_tt_tc.setText("Tổng chi:");
+        lb_tt_tc_right.setText(String.valueOf(tc) + " đ");
     }
     
-    private void cbb_ThongKeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_ThongKeItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbb_ThongKeItemStateChanged
-
+    
+    private void addColumnTable(){
+        DefaultTableModel tableModel = (DefaultTableModel)tab.getModel();
+        tableModel.setColumnIdentifiers(new String[]{
+            "Mã sách", "Tên sách", "Giá", "Số lượng", "Tác giả", "Ngày xuất bản", "Nhà xuất bản", "Thể loại"
+        });
+        
+        DefaultTableColumnModel tableColumnModel = (DefaultTableColumnModel)tab.getColumnModel();
+        tableColumnModel.getColumn(0).setPreferredWidth(100);
+        tableColumnModel.getColumn(1).setPreferredWidth(200);
+        tableColumnModel.getColumn(2).setPreferredWidth(120);
+        tableColumnModel.getColumn(3).setPreferredWidth(100);
+        tableColumnModel.getColumn(4).setPreferredWidth(150);
+        tableColumnModel.getColumn(5).setPreferredWidth(150);
+        tableColumnModel.getColumn(6).setPreferredWidth(150);
+        tableColumnModel.getColumn(7).setPreferredWidth(150);
+        
+        tab.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
+    }
+    
+    public void loadTableSach(List<Sach_DTO> l_Sachs){
+        addColumnTable();
+        
+        DefaultTableModel tableModel = (DefaultTableModel)tab.getModel();
+        tableModel.setRowCount(0);
+        
+        for(Sach_DTO sach : l_Sachs){
+            tableModel.addRow(new String[]{
+                String.valueOf(sach.getMaSach()),
+                sach.getTenSach(),
+                String.valueOf(sach.getGia()),
+                String.valueOf(sach.getSoLuong()),
+                sach.getTacGia(),
+                new SimpleDateFormat("dd/MM/yyyy").format(sach.getNgayXuatBan()),
+                sach.getNhaXuatBan(),
+                sach.getTheLoai().getTl_Sach()
+            });
+        }
+    }
+    
+    
     private void rd_TheoNgayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_TheoNgayMouseClicked
         // TODO add your handling code here:
         rd_TheoNgay.setSelected(true);
@@ -468,12 +558,6 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
       selected_theongay();
-      if(cbb_ThongKe.getSelectedIndex() == 0){
-          load_table_doanhthu(HoaDon_DAO.List_HoaDon_Ngay(pic_theongay.getDate()));
-      }
-      else{
-          load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Ngay(pic_theongay.getDate()));
-      }
     }//GEN-LAST:event_rd_TheoNgayMousePressed
 
     private void rd_TheoThangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_TheoThangMousePressed
@@ -493,18 +577,12 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         pic_theongay.setEnabled(false);
         cbb_theonam_year.setEnabled(false);
         
-        if(cbb_ThongKe.getSelectedIndex() == 0){
-          load_table_doanhthu(HoaDon_DAO.List_HoaDon_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
-      }
-      else{
-          load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
-      }
+        
     }//GEN-LAST:event_rd_TheoThangMousePressed
 
     private void rd_TheoNamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_TheoNamMousePressed
         // TODO add your handling code here:
    
-        
         pan_nam.setEnabled(true);
         cbb_theonam_year.setEnabled(true);
         
@@ -518,83 +596,106 @@ public class ThongKe_GUI extends javax.swing.JFrame {
         cbb_theonam_month.setEnabled(false);
         cbb_theothang_month.setEnabled(false);
         
-         if(cbb_ThongKe.getSelectedIndex() == 0){
-          load_table_doanhthu(HoaDon_DAO.List_HoaDon_Nam(cbb_theonam_year.getSelectedItem().toString()));
-      }
-      else{
-          load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Nam(cbb_theonam_year.getSelectedItem().toString()));
-      }
+         
     }//GEN-LAST:event_rd_TheoNamMousePressed
 
-    private void cbb_theonam_monthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_theonam_monthItemStateChanged
+    private void btn_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_locActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_cbb_theonam_monthItemStateChanged
+        if(cbb_ThongKe.getSelectedItem().equals("Tồn kho")){
+            if(rd_conhang.isSelected()){
+                List<Sach_DTO> sachs = Sach_DAO.getListSach_ConHang();
+                loadTableSach(sachs);
+            }
+            else{
+                List<Sach_DTO> sachs = Sach_DAO.getListSach_HetHang();
+                loadTableSach(sachs);
+            }
+        }
+        else{
+            if(rd_TheoNgay.isSelected()){
+                if(cbb_ThongKe.getSelectedItem().equals("Doanh thu")){
+                    load_table_doanhthu(HoaDon_DAO.List_HoaDon_Ngay(pic_theongay.getDate()));
+                    return;
+                }
+                if(cbb_ThongKe.getSelectedItem().equals("Phiếu nhập")){
+                    load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Ngay(pic_theongay.getDate()));
+                }
+            }
+            else if(rd_TheoThang.isSelected()){
+                if(cbb_ThongKe.getSelectedItem().equals("Doanh thu")){
+                    load_table_doanhthu(HoaDon_DAO.List_HoaDon_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
+                }
+                if(cbb_ThongKe.getSelectedItem().equals("Phiếu nhập")){
+                    load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
+                }
+            }
+            else{
+                if(cbb_ThongKe.getSelectedItem().equals("Doanh thu")){
+                    load_table_doanhthu(HoaDon_DAO.List_HoaDon_Nam(cbb_theonam_year.getSelectedItem().toString()));
+                }
+                if(cbb_ThongKe.getSelectedItem().equals("Phiếu nhập")){
+                    load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Nam(cbb_theonam_year.getSelectedItem().toString()));
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_locActionPerformed
 
-    private void cbb_theothang_monthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_theothang_monthItemStateChanged
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-      
-    }//GEN-LAST:event_cbb_theothang_monthItemStateChanged
+        if(JOptionPane.showConfirmDialog(this, "Bạn muốn quay lại trang chính ?", "Thông báo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+            this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            return;
+        }
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    }//GEN-LAST:event_formWindowClosing
 
-    private void cbb_theonam_yearItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_theonam_yearItemStateChanged
+    private void rd_hethangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rd_hethangItemStateChanged
         // TODO add your handling code here:
-      
-    }//GEN-LAST:event_cbb_theonam_yearItemStateChanged
+    }//GEN-LAST:event_rd_hethangItemStateChanged
 
-    private void pic_theongayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pic_theongayPropertyChange
+    private void rd_hethangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_hethangMouseClicked
         // TODO add your handling code here:
-//        if(cbb_ThongKe.getSelectedIndex() == 0){
-//          load_table_doanhthu(HoaDon_DAO.List_HoaDon_Ngay(pic_theongay.getDate()));
-//      }
-//      else{
-//          load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Ngay(pic_theongay.getDate()));
-//      }
-    }//GEN-LAST:event_pic_theongayPropertyChange
+        rd_hethang.setSelected(true);
+    }//GEN-LAST:event_rd_hethangMouseClicked
 
-    private void cbb_theonam_monthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbb_theonam_monthPropertyChange
+    private void rd_hethangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_hethangMousePressed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbb_theonam_monthPropertyChange
+        rd_conhang.setSelected(false);
+    }//GEN-LAST:event_rd_hethangMousePressed
 
-    private void cbb_theothang_monthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbb_theothang_monthPropertyChange
+    private void rd_conhangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rd_conhangItemStateChanged
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbb_theothang_monthPropertyChange
+    }//GEN-LAST:event_rd_conhangItemStateChanged
 
-    private void cbb_theonam_yearPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbb_theonam_yearPropertyChange
+    private void rd_conhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_conhangMouseClicked
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_cbb_theonam_yearPropertyChange
+        rd_conhang.setSelected(true);
+    }//GEN-LAST:event_rd_conhangMouseClicked
 
-    private void cbb_theonam_monthMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_theonam_monthMousePressed
+    private void rd_conhangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_conhangMousePressed
         // TODO add your handling code here:
-         if(cbb_ThongKe.getSelectedIndex() == 0){
-          load_table_doanhthu(HoaDon_DAO.List_HoaDon_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
-      }
-      else{
-          load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
-      }
-    }//GEN-LAST:event_cbb_theonam_monthMousePressed
+        rd_hethang.setSelected(false);
+    }//GEN-LAST:event_rd_conhangMousePressed
 
-    private void cbb_theothang_monthMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_theothang_monthMousePressed
+    private void cbb_ThongKeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_ThongKeItemStateChanged
         // TODO add your handling code here:
-          if(cbb_ThongKe.getSelectedIndex() == 0){
-          load_table_doanhthu(HoaDon_DAO.List_HoaDon_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
-      }
-      else{
-          load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Thang(cbb_theonam_month.getSelectedItem().toString(), cbb_theothang_month.getSelectedItem().toString().split(" ")[1].trim()));
-      }
-    }//GEN-LAST:event_cbb_theothang_monthMousePressed
-
-    private void cbb_theonam_yearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbb_theonam_yearMousePressed
-        // TODO add your handling code here:
-            if(cbb_ThongKe.getSelectedIndex() == 0){
-          load_table_doanhthu(HoaDon_DAO.List_HoaDon_Nam(cbb_theonam_year.getSelectedItem().toString()));
-      }
-      else{
-          load_table_phieunhap(PhieuNhap_DAO.List_PhieuNhap_Nam(cbb_theonam_year.getSelectedItem().toString()));
-      }
-    }//GEN-LAST:event_cbb_theonam_yearMousePressed
+        if(!evt.getItem().equals("Tồn kho")){
+            rd_conhang.setVisible(false);
+            rd_hethang.setVisible(false);
+            lb_tongsach.setVisible(true);
+            lb_tongsach_left.setVisible(true);
+            lb_tt_tc.setVisible(true);
+            lb_tt_tc_right.setVisible(true);
+        }
+        else{
+            rd_conhang.setVisible(true);
+            rd_hethang.setVisible(true);
+            lb_tongsach.setVisible(false);
+            lb_tongsach_left.setVisible(false);
+            lb_tt_tc.setVisible(false);
+            lb_tt_tc_right.setVisible(false);
+        }
+    }//GEN-LAST:event_cbb_ThongKeItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -602,16 +703,17 @@ public class ThongKe_GUI extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_loc;
     private javax.swing.JComboBox<String> cbb_ThongKe;
     private javax.swing.JComboBox<String> cbb_theonam_month;
     private javax.swing.JComboBox<String> cbb_theonam_year;
     private javax.swing.JComboBox<String> cbb_theothang_month;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lb_thongtu;
     private javax.swing.JLabel lb_tongsach;
+    private javax.swing.JLabel lb_tongsach_left;
+    private javax.swing.JLabel lb_tt_tc;
+    private javax.swing.JLabel lb_tt_tc_right;
     private javax.swing.JPanel pan_nam;
     private javax.swing.JPanel pan_ngay;
     private javax.swing.JPanel pan_thang;
@@ -619,6 +721,8 @@ public class ThongKe_GUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton rd_TheoNam;
     private javax.swing.JRadioButton rd_TheoNgay;
     private javax.swing.JRadioButton rd_TheoThang;
+    private javax.swing.JRadioButton rd_conhang;
+    private javax.swing.JRadioButton rd_hethang;
     private javax.swing.JTable tab;
     private javax.swing.JLabel title_TaiKhoan;
     // End of variables declaration//GEN-END:variables

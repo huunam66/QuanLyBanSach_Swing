@@ -31,7 +31,7 @@ public class DangNhap_GUI extends javax.swing.JFrame {
         ImageIcon imageIcon = new ImageIcon("src/Pictures/login.jpg");
         Image image = imageIcon.getImage().getScaledInstance(imgLogin.getWidth(), imgLogin.getHeight(), Image.SCALE_SMOOTH);
         imgLogin.setIcon(new ImageIcon(image));
-        btn_Login.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/login.png"))));
+        btn_Login.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/login.png")));
         
         imageIcon = new ImageIcon("src/Pictures/logoStore.png");
         image = imageIcon.getImage().getScaledInstance(logoDangNhap.getWidth(), logoDangNhap.getHeight(), Image.SCALE_SMOOTH);

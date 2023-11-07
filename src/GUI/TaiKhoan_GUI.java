@@ -8,6 +8,7 @@ import DAO.TaiKhoan_DAO;
 import DTO.TaiKhoan_DTO;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -36,6 +37,12 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         
+        btnLamMoi_Left.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/reset.png")));
+        btnLamMoi_Right.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/reset.png")));
+        btn_DangKy.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/register.png")));
+        btn_doiMatKhau.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/reset-password.png")));
+        btn_Xoa.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/delete.png")));
+        
         title_TaiKhoan.setHorizontalAlignment(SwingConstants.CENTER);
         title_TaiKhoan.setHorizontalTextPosition(SwingConstants.CENTER);
         title_DangKy.setHorizontalAlignment(SwingConstants.CENTER);
@@ -46,9 +53,6 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         
         imageDangKy.setIcon(new ImageIcon(image));
         
-        for(String item : new String[]{"User", "admin"}){
-            Cbb_QuyenNV.addItem(item);
-        }
         
         this.loadTableTaiKhoan();
     }
@@ -78,19 +82,13 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         text_maNV = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         text_tenNhanVien = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        text_cmnd = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         text_tenTaiKhoan = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        text_matKhau = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        text_matKhauMoi = new javax.swing.JTextField();
         btn_doiMatKhau = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Cbb_QuyenNV = new javax.swing.JComboBox<>();
-        btn_capNhatQuyen = new javax.swing.JButton();
-        btn_showPassword = new javax.swing.JButton();
+        text_matKhauMoi = new javax.swing.JPasswordField();
         title_DangKy = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -117,7 +115,7 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("THAO TÁC"));
 
         btn_Xoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_Xoa.setText("Xoá");
+        btn_Xoa.setText("Xoá tài khoản");
         btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_XoaMouseClicked(evt);
@@ -140,7 +138,7 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLamMoi_Left, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLamMoi_Left, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -163,7 +161,6 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
             }
         ));
         table_TaiKhoan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        table_TaiKhoan.setRowHeight(20);
         table_TaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 table_TaiKhoanMouseClicked(evt);
@@ -244,28 +241,14 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         text_tenNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         text_tenNhanVien.setFocusable(false);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("CMND:");
-
-        text_cmnd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        text_cmnd.setFocusable(false);
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Tên tài khoản:");
 
         text_tenTaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         text_tenTaiKhoan.setFocusable(false);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Mật khẩu:");
-
-        text_matKhau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        text_matKhau.setFocusable(false);
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Mật khẩu mới:");
-
-        text_matKhauMoi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btn_doiMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_doiMatKhau.setText("Đổi mật khẩu");
@@ -274,30 +257,20 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
                 btn_doiMatKhauMouseClicked(evt);
             }
         });
+        btn_doiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_doiMatKhauActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Quyền:");
+        jLabel1.setText("Quyền hạn:");
+        jLabel1.setFocusable(false);
 
         Cbb_QuyenNV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Cbb_QuyenNV.setFocusable(false);
 
-        btn_capNhatQuyen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_capNhatQuyen.setText("Cập nhật");
-        btn_capNhatQuyen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_capNhatQuyenMouseClicked(evt);
-            }
-        });
-
-        btn_showPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_showPassword.setText("Hiện");
-        btn_showPassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_showPasswordMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btn_showPasswordMouseReleased(evt);
-            }
-        });
+        text_matKhauMoi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -308,36 +281,27 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(text_matKhauMoi)
                             .addComponent(text_tenTaiKhoan)
-                            .addComponent(text_maNV)
-                            .addComponent(text_cmnd)
-                            .addComponent(text_tenNhanVien)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(text_matKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_showPassword))))
+                            .addComponent(text_matKhauMoi)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(47, 47, 47)
-                                .addComponent(Cbb_QuyenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_capNhatQuyen))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(btn_doiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Cbb_QuyenNV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(text_maNV)
+                            .addComponent(text_tenNhanVien))))
                 .addContainerGap())
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(btn_doiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,9 +309,8 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(Cbb_QuyenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_capNhatQuyen))
-                .addGap(30, 30, 30)
+                    .addComponent(Cbb_QuyenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(text_maNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -357,24 +320,15 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
                     .addComponent(text_tenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(text_cmnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(text_tenTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_showPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(text_matKhau)
-                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(text_matKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_doiMatKhau)
-                .addGap(40, 40, 40))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -564,20 +518,11 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
             int numRow = table_TaiKhoan.getSelectedRow();
             
             if(radio_DaCoTK.isSelected()){ 
-                btn_capNhatQuyen.setEnabled(true);
-    
-                String maNV = table_TaiKhoan.getValueAt(numRow, 3).toString();
-
-                if(this.maNV.equals(maNV)){
-                    btn_capNhatQuyen.setEnabled(false);
-                }
-            
-                text_maNV.setText(table_TaiKhoan.getValueAt(numRow, 3).toString());
-                text_tenNhanVien.setText(table_TaiKhoan.getValueAt(numRow, 4).toString());
-                Cbb_QuyenNV.setSelectedItem(table_TaiKhoan.getValueAt(numRow, 2));
-                text_cmnd.setText(table_TaiKhoan.getValueAt(numRow, 5).toString());
-                text_tenTaiKhoan.setText(table_TaiKhoan.getValueAt(numRow, 0).toString());
-                text_matKhau.setText("*******************");
+                Cbb_QuyenNV.removeAllItems();
+                Cbb_QuyenNV.addItem(table_TaiKhoan.getValueAt(numRow, 3).toString());
+                text_maNV.setText(table_TaiKhoan.getValueAt(numRow, 0).toString());
+                text_tenNhanVien.setText(table_TaiKhoan.getValueAt(numRow, 1).toString());
+                text_tenTaiKhoan.setText(table_TaiKhoan.getValueAt(numRow, 2).toString());
                 return;
             }
             else{
@@ -587,23 +532,6 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
             }  
         }
     }//GEN-LAST:event_table_TaiKhoanMouseClicked
-
-    private void btn_showPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_showPasswordMousePressed
-        // TODO add your handling code here:
-        if(text_matKhau.getText().equals("")){
-            return;
-        }
-        String password = TaiKhoan_DAO.getPassword(text_maNV.getText());
-        text_matKhau.setText(password);
-    }//GEN-LAST:event_btn_showPasswordMousePressed
-
-    private void btn_showPasswordMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_showPasswordMouseReleased
-        // TODO add your handling code here:
-        if(text_matKhau.getText().equals("")){
-            return;
-        }
-        text_matKhau.setText("*******************");
-    }//GEN-LAST:event_btn_showPasswordMouseReleased
 
     private void radio_DaCoTKMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radio_DaCoTKMousePressed
         // TODO add your handling code here:
@@ -622,9 +550,7 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         Cbb_QuyenNV.setSelectedItem("User");
         text_maNV.setText("");
         text_tenNhanVien.setText("");
-        text_cmnd.setText("");
         text_tenTaiKhoan.setText("");
-        text_matKhau.setText("");
         text_matKhauMoi.setText("");
         radio_DaCoTK.setSelected(true);
         radio_chuaCoDK.setSelected(false);
@@ -642,44 +568,10 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         this.loadTableChuaCoTaiKhoan();
     }//GEN-LAST:event_btnLamMoi_RightMouseClicked
 
-    private void btn_capNhatQuyenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_capNhatQuyenMouseClicked
-        // TODO add your handling code here:
-        if(btn_capNhatQuyen.isEnabled()){
-            int numRow = table_TaiKhoan.getSelectedRow();
-            String Quyen = table_TaiKhoan.getValueAt(numRow, 2).toString();
-            String maNV = table_TaiKhoan.getValueAt(numRow, 3).toString();
-            if(Quyen.equals(Cbb_QuyenNV.getSelectedItem().toString())){
-                return;
-            }
-
-//            if(this.maNV.equals(maNV)){
-//                JOptionPane.showConfirmDialog(this, "Bạn không nên làm điều này !!!", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
-//                return;
-//
-//            }
-
-            if(JOptionPane.showConfirmDialog(this, "Xác nhận phân quyền ?", "Thông báo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
-                int result = TaiKhoan_DAO.updateQuyen(text_maNV.getText(), Cbb_QuyenNV.getSelectedItem().toString());
-                this.loadTableTaiKhoan();
-
-                ArrayList<JTextField> l_textFields = this.listTextLeft();
-                for(JTextField textField : l_textFields){
-                    textField.setText("");
-                }
-
-                if(result <= 0){
-                    JOptionPane.showConfirmDialog(this, "Có vẻ như xảy ra lỗi !!!", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
-                } 
-            }
-        }
-    }//GEN-LAST:event_btn_capNhatQuyenMouseClicked
-
     private ArrayList<JTextField> listTextLeft(){
         ArrayList<JTextField> l_textFields = new ArrayList<JTextField>();
         
-        l_textFields.add(text_cmnd);
         l_textFields.add(text_maNV);
-        l_textFields.add(text_matKhau);
         l_textFields.add(text_matKhauMoi);
         l_textFields.add(text_tenNhanVien);
         l_textFields.add(text_tenTaiKhoan);
@@ -687,28 +579,6 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         return l_textFields;
     }
     
-    private void btn_doiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_doiMatKhauMouseClicked
-        // TODO add your handling code here:
-        if(text_matKhauMoi.getText().equals("")){
-            JOptionPane.showConfirmDialog(this, "Hãy nhập mật khẩu mới !!!", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        if(JOptionPane.showConfirmDialog(this, "Xác nhận đổi mật khẩu ?", "Thông báo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
-            int result = TaiKhoan_DAO.changePassword(text_maNV.getText(), text_matKhauMoi.getText());
-            this.loadTableTaiKhoan();
-            
-            ArrayList<JTextField> l_textFields = this.listTextLeft();
-            for(JTextField textField : l_textFields){
-                textField.setText("");
-            }
-            
-            if(result <= 0){
-                JOptionPane.showConfirmDialog(this, "Có vẻ như xảy ra lỗi !!!", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_btn_doiMatKhauMouseClicked
-
     private void btn_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseClicked
         // TODO add your handling code here:
         
@@ -782,6 +652,35 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_text_searchKeyReleased
 
+    private void btn_doiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_doiMatKhauMouseClicked
+        // TODO add your handling code here:
+        if(text_matKhauMoi.getText().equals("")){
+            JOptionPane.showConfirmDialog(this, "Hãy nhập mật khẩu mới !!!", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if(JOptionPane.showConfirmDialog(this, "Xác nhận đổi mật khẩu ?", "Thông báo", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+            int result = TaiKhoan_DAO.changePassword(text_maNV.getText(), text_matKhauMoi.getText());
+            this.loadTableTaiKhoan();
+
+            ArrayList<JTextField> l_textFields = this.listTextLeft();
+            for(JTextField textField : l_textFields){
+                textField.setText("");
+            }
+
+            if(result <= 0){
+                JOptionPane.showConfirmDialog(this, "Đổi mật khẩu không thành công !!!", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            JOptionPane.showConfirmDialog(this, "Đổi mật khẩu thành công !!!", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btn_doiMatKhauMouseClicked
+
+    private void btn_doiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doiMatKhauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_doiMatKhauActionPerformed
+
     private void radioDaCoTaiKhoanSearch(){
         DefaultTableModel tableModel = (DefaultTableModel)table_TaiKhoan.getModel();
         tableModel.setRowCount(0);
@@ -833,7 +732,7 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
     private void addColumnTableTaiKhoan(){
         DefaultTableModel tableModel = (DefaultTableModel)table_TaiKhoan.getModel();
         tableModel.setColumnIdentifiers(new String[]{
-            "Tên tài khoản", "Mật khẩu", "Quyền", "Mã nhân viên", "Tên nhân viên", "CMND"
+            "Mã nhân viên", "Tên nhân viên", "Tên tài khoản", "Quyền hạn",
         });
         
         DefaultTableColumnModel table_ColumnModel = (DefaultTableColumnModel)table_TaiKhoan.getColumnModel();
@@ -841,9 +740,6 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         table_ColumnModel.getColumn(1).setPreferredWidth(150);
         table_ColumnModel.getColumn(2).setPreferredWidth(100);
         table_ColumnModel.getColumn(2).setPreferredWidth(100);
-        table_ColumnModel.getColumn(3).setPreferredWidth(120);
-        table_ColumnModel.getColumn(4).setPreferredWidth(200);
-        table_ColumnModel.getColumn(5).setPreferredWidth(100);
         
         table_TaiKhoan.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
     }
@@ -855,9 +751,11 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
         this.addColumnTableTaiKhoan();
         tableModel.setRowCount(0);
         
-        this.l_taiKhoans = TaiKhoan_DAO.getListTaiKhoan();
+        this.l_taiKhoans = TaiKhoan_DAO.getListTaiKhoan(maNV);
         for(String[] tk : this.l_taiKhoans){
-            tableModel.addRow(tk);
+            tableModel.addRow(new String[]{
+                tk[0], tk[4], tk[1], tk[3]
+            });
         }
     }
     
@@ -872,9 +770,7 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnLamMoi_Right;
     private javax.swing.JButton btn_DangKy;
     private javax.swing.JButton btn_Xoa;
-    private javax.swing.JButton btn_capNhatQuyen;
     private javax.swing.JButton btn_doiMatKhau;
-    private javax.swing.JButton btn_showPassword;
     private javax.swing.JLabel imageDangKy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -883,9 +779,7 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -899,11 +793,9 @@ public class TaiKhoan_GUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton radio_chuaCoDK;
     private javax.swing.JTable table_TaiKhoan;
     private javax.swing.JPasswordField text_againPassword_DK;
-    private javax.swing.JTextField text_cmnd;
     private javax.swing.JTextField text_maNV;
     private javax.swing.JTextField text_maNV_DK;
-    private javax.swing.JTextField text_matKhau;
-    private javax.swing.JTextField text_matKhauMoi;
+    private javax.swing.JPasswordField text_matKhauMoi;
     private javax.swing.JPasswordField text_password_DK;
     private javax.swing.JTextField text_search;
     private javax.swing.JTextField text_tenNhanVien;

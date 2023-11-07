@@ -44,13 +44,13 @@ public class Sach_GUI extends javax.swing.JFrame {
         this.setTitle("Quản lí sách");
         this.setVisible(true);
         
-        btn_ThemMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/add.png"))));
-        btn_Sua.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/update.png"))));
-        btn_Xoa.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/delete.png"))));
-        btn_LamMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/reset.png"))));
-        btn_nhacungcap.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/supplier.png"))));
-        btn_TheLoaiSach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/categories.png"))));
-        btn_nhapsach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/imp_book.png"))));
+        btn_ThemMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/add.png")));
+        btn_Sua.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/update.png")));
+        btn_Xoa.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/delete.png")));
+        btn_LamMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/reset.png")));
+        btn_nhacungcap.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/supplier.png")));
+        btn_TheLoaiSach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/categories.png")));
+        btn_nhapsach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/imp_book.png")));
         
         if(!this.Quyen.toLowerCase().equals("admin")){
             btn_ThemMoi.setVisible(false);

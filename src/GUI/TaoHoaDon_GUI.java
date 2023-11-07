@@ -62,10 +62,10 @@ public class TaoHoaDon_GUI extends javax.swing.JFrame {
         title.setHorizontalTextPosition(SwingConstants.CENTER);
         
         
-        btn_ChooseSach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/check.png"))));
-        btn_lamMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/reset.png"))));
-        btn_XoaInOrder.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/del_order.png"))));
-        btn_ThanhToan.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/bill_pay.png"))));
+        btn_ChooseSach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/check.png")));
+        btn_lamMoi.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/reset.png")));
+        btn_XoaInOrder.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/del_order.png")));
+        btn_ThanhToan.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/bill_pay.png")));
         
         
         ImageIcon imageIcon = new ImageIcon("src/Pictures/logoStoreHome.png");

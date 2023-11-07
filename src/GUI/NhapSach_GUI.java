@@ -48,10 +48,10 @@ public class NhapSach_GUI extends javax.swing.JFrame {
         tableModel = (DefaultTableModel)tab.getModel();
         tableColumnModel = (DefaultTableColumnModel)tab.getColumnModel();
         
-        btn_nhap.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/add.png"))));
-        btn_loaibo.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/x-button.png"))));
-        btn_reset.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/reset.png"))));
-        btn_lap.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/check.png"))));
+        btn_nhap.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/add.png")));
+        btn_loaibo.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/x-button.png")));
+        btn_reset.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/reset.png")));
+        btn_lap.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/check.png")));
         
         this.setLocationRelativeTo(null);
         List<NhaCungCap_DTO> ncc = NhaCungCap_DAO.List_NhaCungCap();

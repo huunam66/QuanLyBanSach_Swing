@@ -29,17 +29,18 @@ public class TrangChu_GUI extends javax.swing.JFrame {
         this.setTitle("Trang chủ nhân viên");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+   
         
 //        if(!this.Quyen.toLowerCase().equals("admin")){
 //            btn_DanhSachNV.setVisible(false);
 //        }
 //        
         
-        btn_QuanLySach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/book-stack.png"))));
-        btn_ThongKe.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/analytics.png"))));
-        btn_QuanLyNV.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/steward.png"))));
-        btn_TaoHoaDon.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/bill.png"))));
-        btn_ThongTin.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(Sach_GUI.class.getResource("Icon/id-card.png"))));
+        btn_QuanLySach.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/book-stack.png")));
+        btn_ThongKe.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/analytics.png")));
+        btn_QuanLyNV.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/steward.png")));
+        btn_TaoHoaDon.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/bill.png")));
+        btn_ThongTin.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage("src/Icon/id-card.png")));
         
         ImageIcon imageicon = new ImageIcon("src/Pictures/imgTrangChu.jpg");
         Image image = imageicon.getImage().getScaledInstance(ImageHome.getWidth(), ImageHome.getHeight(), Image.SCALE_SMOOTH);
@@ -98,6 +99,11 @@ public class TrangChu_GUI extends javax.swing.JFrame {
         btn_QuanLySach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuanLySachMouseClicked(evt);
+            }
+        });
+        btn_QuanLySach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_QuanLySachActionPerformed(evt);
             }
         });
 
@@ -264,20 +270,26 @@ public class TrangChu_GUI extends javax.swing.JFrame {
 
     private void btn_QuanLySachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLySachMouseClicked
         // TODO add your handling code here:
+        if(Quyen.toUpperCase().equals("nhân viên".toUpperCase())){
+            JOptionPane.showConfirmDialog(this, "Không có quyền truy cập !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         new Sach_GUI(this, this.Quyen, this.Ma_NV);
-        this.setEnabled(false);
     }//GEN-LAST:event_btn_QuanLySachMouseClicked
 
     private void btn_ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThongKeMouseClicked
         // TODO add your handling code here:
       
-        new ThongKe_GUI().setVisible(true);
+        new ThongKe_GUI(Quyen).setVisible(true);
     }//GEN-LAST:event_btn_ThongKeMouseClicked
 
     private void btn_QuanLyNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuanLyNVMouseClicked
         // TODO add your handling code here:
-        new KhachHang_GUI(this, this.Quyen);
-        this.setEnabled(false);
+        if(Quyen.toUpperCase().equals("admin".toUpperCase())){
+            new NhanVien_GUI(this, this.Ma_NV);
+            return;
+        }
+        JOptionPane.showConfirmDialog(this, "Không có quyền truy cập !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btn_QuanLyNVMouseClicked
 
     private void btn_ThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThongTinMouseClicked
@@ -288,6 +300,10 @@ public class TrangChu_GUI extends javax.swing.JFrame {
 
     private void btn_TaoHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TaoHoaDonMouseClicked
         // TODO add your handling code here:
+        if(Quyen.toUpperCase().equals("thủ kho".toUpperCase())){
+            JOptionPane.showConfirmDialog(this, "Không có quyền truy cập !", "Thông báo", JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         new TaoHoaDon_GUI(this, this.Ma_NV);
         this.setEnabled(false);
     }//GEN-LAST:event_btn_TaoHoaDonMouseClicked
@@ -316,6 +332,10 @@ public class TrangChu_GUI extends javax.swing.JFrame {
     private void btn_ThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThongKeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ThongKeActionPerformed
+
+    private void btn_QuanLySachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLySachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_QuanLySachActionPerformed
 
     /**
      * @param args the command line arguments

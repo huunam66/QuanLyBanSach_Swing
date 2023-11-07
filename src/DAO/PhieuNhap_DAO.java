@@ -58,12 +58,8 @@ public class PhieuNhap_DAO extends DataProvider{
                     pn.setNgayLap(result.getDate(2));
                     pn.setSoluong(result.getInt(3));
                     pn.setTongTien(result.getDouble(4));
-                    NhanVien_DTO nv = new NhanVien_DTO();
-                    nv.setMaNV(result.getLong(5));
-                    NhaCungCap_DTO ncc = new NhaCungCap_DTO();
-                    ncc.setMaNCC(result.getLong(6));
-                    pn.setNhaCungCap(ncc);
-                    pn.setNhanVien(nv);
+                    pn.setNhaCungCap(NhaCungCap_DAO.Get_NhaCungCap(result.getString(5)));
+                    pn.setNhanVien(NhanVien_DAO.getNhanVien(result.getString(6)));
 
                     pns.add(pn);
                 }
@@ -89,12 +85,8 @@ public class PhieuNhap_DAO extends DataProvider{
                     pn.setNgayLap(result.getDate(2));
                     pn.setSoluong(result.getInt(3));
                     pn.setTongTien(result.getDouble(4));
-                    NhanVien_DTO nv = new NhanVien_DTO();
-                    nv.setMaNV(result.getLong(5));
-                    NhaCungCap_DTO ncc = new NhaCungCap_DTO();
-                    ncc.setMaNCC(result.getLong(6));
-                    pn.setNhaCungCap(ncc);
-                    pn.setNhanVien(nv);
+                    pn.setNhaCungCap(NhaCungCap_DAO.Get_NhaCungCap(result.getString(5)));
+                    pn.setNhanVien(NhanVien_DAO.getNhanVien(result.getString(6)));
 
                     pns.add(pn);
                 }
@@ -120,12 +112,8 @@ public class PhieuNhap_DAO extends DataProvider{
                     pn.setNgayLap(result.getDate(2));
                     pn.setSoluong(result.getInt(3));
                     pn.setTongTien(result.getDouble(4));
-                    NhanVien_DTO nv = new NhanVien_DTO();
-                    nv.setMaNV(result.getLong(5));
-                    NhaCungCap_DTO ncc = new NhaCungCap_DTO();
-                    ncc.setMaNCC(result.getLong(6));
-                    pn.setNhaCungCap(ncc);
-                    pn.setNhanVien(nv);
+                    pn.setNhaCungCap(NhaCungCap_DAO.Get_NhaCungCap(result.getString(5)));
+                    pn.setNhanVien(NhanVien_DAO.getNhanVien(result.getString(6)));
 
                     pns.add(pn);
                 }
@@ -151,12 +139,9 @@ public class PhieuNhap_DAO extends DataProvider{
                 pn.setNgayLap(result.getDate(2));
                 pn.setSoluong(result.getInt(3));
                 pn.setTongTien(result.getDouble(4));
-                NhanVien_DTO nv = new NhanVien_DTO();
-                nv.setMaNV(result.getLong(5));
-                NhaCungCap_DTO ncc = new NhaCungCap_DTO();
-                ncc.setMaNCC(result.getLong(6));
-                pn.setNhaCungCap(ncc);
-                pn.setNhanVien(nv);
+                pn.setNhaCungCap(NhaCungCap_DAO.Get_NhaCungCap(result.getString(5)));
+                pn.setNhanVien(NhanVien_DAO.getNhanVien(result.getString(6)));
+                    
                 return pn;
             }
             
